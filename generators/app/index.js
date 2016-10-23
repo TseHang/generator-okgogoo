@@ -124,14 +124,14 @@ module.exports = generators.Base.extend({
         // merge in this.props
         this.props = _.merge(this.props, answers);
 
-        this.log(chalk.red('\n\nIt\'s my pleasure to serve you, ' +this.props.authorName));
+        this.log(chalk.red('\n\nIt\'s my pleasure to serve you, ' +this.props.authorName + "..."));
       }.bind(this));
     }
   },
 
   writing: {
     default: function () {
-      console.log(chalk.red("\nwriting start...\n"));
+      console.log(chalk.red("writing start...\n"));
 
       // write package.json
       var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
