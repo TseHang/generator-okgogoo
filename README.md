@@ -46,6 +46,6 @@ You can see the options of each sub generators by running `yo okgogoo:(sub-name)
 MIT © TseHang
 
 
-[npm-image]: https://badge.fury.io/js/generator-cat.svg
-[npm-url]: https://npmjs.org/package/generator-cat
+[npm-image]: https://badge.fury.io/js/generator-okgogoo.svg
+[npm-url]: https://www.npmjs.com/package/generator-okgogoo
 
