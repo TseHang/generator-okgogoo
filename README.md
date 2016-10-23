@@ -1,138 +1,51 @@
-# Gulp-Frontend-Start  
+# generator-okgogoo [![NPM version][npm-image]][npm-url]
 
-**Help a front-end-developer do better and construct his/her code**  
+## Installation
 
-## QUICK START
+Must have 
++ [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
-```
-＄ sudo npm stall
-```
-
-build sass , js 
-```
-$ gulp
+```bash
+npm install -g yo
+npm install -g generator-okgogoo
 ```
 
-build hbs to html, and watch
-```
-$ ./bin/build -w
-```
+Make a folder for project and then generate your new project:
 
-
-## About Frontend Template
-It helps you to construct and orginize your static code , quickly minify html , css , js , img.  
-
-
-Use [gulp](http://gulpjs.com) and [canner-core](https://www.npmjs.com/package/canner-core)
-( The html's template is [hbs](http://handlebarsjs.com) )
-
-+ gulp
-+ gulp-compass
-+ gulp-concat
-+ gulp-imagemin
-+ gulp-minify-css
-+ gulp-plumber
-+ gulp-rename
-+ gulp-uglify
-+ gulp-clean-css
-+ gulp-watch
-+ canner-core
-+ minist
-
-
-## Developer
-
-### gulp
-
-build sass , js , then watch
-```
-$ gulp
-``` 
-
-minify css , js
-```
-$ gulp minify-css
-$ gulp minify-js
+```bash
+mkdir (porject name)
+cd (project name)
+yo okgogoo
 ```
 
+## Getting To Know [Yeoman](http://yeoman.io)
 
-concate all lib **js** or **css** file to one file ,  reduce request
-```
-$ gulp concate-css
-$ gulp concate-js
-```
+ * Yeoman has a heart of gold.
+ * Yeoman is a person with feelings and opinions, but is very easy to work with.
+ * Yeoman can be too opinionated at times but is easily convinced not to be.
 
-compress img ( It's usually use on final in your project)
-```
-$ gulp image
-```
+## Sub generators
 
-### canner-core
+You can see the options of each sub generators by running `yo okgogoo:(sub-name) --help`.
 
-build **hbs to html**
-```
-$ ./bin/build 
-```
-**parameters**
-+ -w : watch
-+ -m : minify code
+- `okgogoo:gulp`
+- `okgogoo:static` (type)
 
-## Intro every dirname
 
-### ./sass
-puts sass / scss code
-+ input : sass /
-+ output : dist / css /
 
-### ./js
-puts js code
-+ input : js /
-+ output : dist / js
+#### Gulp
 
-### ./dist 
-puts **minify's code (css , js , img , bgm)**
+- Use to make a web frontend-flow-control .
+- Default:
+  - `canner-core` (build)
+  - `handlebar.js` (hbs -> html)
+  - `compass` (scss)
 
-### ./src
-put some library code ( js , css )
-ex: [normalize.css](https://necolas.github.io/normalize.css/)
+## License
 
-### ./lib
-puts **minify's library code**
+MIT © TseHang
 
-### ./layout
-puts **hbs template** ( include partial )
 
-### ./bin
-A **build file** to control hbs transforming.
+[npm-image]: https://badge.fury.io/js/generator-cat.svg
+[npm-url]: https://npmjs.org/package/generator-cat
 
-### ./route.js
-control the data to transform hbs's template
-- data : hbs's data
-- partials : partial.js
-- layout : input file
-- filename : output file   
-
-```
-var route = [
-{
-  data: {
-	path: './',
-	title: 'Hello guys',
-	first_word: 'It is a good template'
-  },
-  partials: './partial.js',
-  layout:  "./layout/index.hbs", 
-  filename: "./index.html" 
-}
-];
-module.exports = route;
-```
-
-### ./partial.js
-**partial hbs** &nbsp;&nbsp;&nbsp;&nbsp;ex: {{> head}}
-
-### ./gulpfile.js
-control gulp
-
-### ./config.rb
-a config.rb for [compass](http://compass-style.org)
