@@ -10,6 +10,7 @@
   "files": [
     "generators"
   ],
+  "main": "generators/index.js",
   "keywords": [
     "generator-okgogoo",
     "yeoman-generator"
