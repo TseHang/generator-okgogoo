@@ -24,12 +24,12 @@ yo okgogoo
  * Yeoman is a person with feelings and opinions, but is very easy to work with.
  * Yeoman can be too opinionated at times but is easily convinced not to be.
 
-## Generator
+## Module
 
 #### GoGO Frontend
 Helps you to construct and orginize your static code , quickly minify html , css , js , img.  
 
-- [GoGoFrontend.md](GoGoFrontend.md)
+- [GoGoFrontend.md](https://github.com/TseHang/generator-okgogoo/blob/master/GoGoFrontend.md)
 
 ## Sub generators
 
@@ -51,4 +51,10 @@ You can see the options of each sub generators by running `yo okgogoo:(sub-name)
 ## License
 
 MIT © [TseHang](https://github.com/TseHang)
+
+[npm-image]: https://badge.fury.io/js/generator-okgogoo.svg
+[npm-url]: https://npmjs.org/package/generator-okgogoo
+
+
+
 
