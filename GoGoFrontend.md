@@ -1,32 +1,49 @@
 # GoGo Frontend
 - By [generator-okgogoo](https://github.com/TseHang/generator-okgogoo)
 
-It helps you to construct and orginize your static code , quickly minify html , css , js , img.  
+It helps you to construct and orginize your static code , quickly minify html , css , js , open server, and compress img.  
 
-Use [gulp](http://gulpjs.com) and [canner-core](https://www.npmjs.com/package/canner-core)
-( The html's template is [hbs](http://handlebarsjs.com) )
+#### A QUICK START FOR FRONTEND
+- Support ES6、Sass(Compass)、Hbs
+- Support livereload
 
-+ gulp
-+ gulp-compass
-+ gulp-concat
-+ gulp-imagemin
-+ gulp-minify-css
-+ gulp-plumber
-+ gulp-rename
-+ gulp-uglify
-+ gulp-clean-css
-+ canner-core
-+ minist
+```
+＄ sudo npm install
+```
 
-## Directory
+#### description
+It use [gulp](http://gulpjs.com) to compress , minify , open server, build system.
+( The html's template is [handlebars](http://handlebarsjs.com) )
+
+
+#### command
+
+build sass , js , hbs , open a server(`port: 8000`), then watch
+```
+$ gulp
+``` 
+
+minify css , js, html, compress img 
+```
+$ gulp minify
+```
+
+
+concate **`./src/*.css`** file to `./lib/library.min.css` file ,  reduce request (So do .js)
+```
+$ gulp concate-css
+$ gulp concate-js
+```
+
+## Structure
 
 #### `./sass`
-sass / scss code
+sass / scss code (import `normalize.css` initially)
 + input : sass /
 + output : dist / css /
 
 #### `./js`
-puts js code
+puts js (ES6) code
 + input : js /
 + output : dist / js
 
@@ -35,7 +52,7 @@ puts js code
 
 #### `./src`
 some library code ( js , css )
-ex: [normalize.css](https://necolas.github.io/normalize.css/)
+ex: [jQurty](https://jquery.com)
 
 #### `./lib`
 **minify's library code**
@@ -43,34 +60,25 @@ ex: [normalize.css](https://necolas.github.io/normalize.css/)
 #### `./layout`
 **hbs template** ( include partial )
 
-#### `./bin`
-Use **build** to control hbs transforming.
+#### `./hbsRouter.js`
+control the data to transform hbs's template. Look [gulp-hbs-router](https://www.npmjs.com/package/gulp-hbs-router)
 
-#### `./route.js`
-control the data to transform hbs's template
-- data : hbs's data
-- partials : partial.js
-- layout : input file
-- filename : output file   
-
-```
-var route = [
-{
-  data: {
-  path: './',
-  title: 'Hello guys',
-  first_word: 'It is a good template'
+```javascript
+const hbsRouter = {
+  index: {
+    author: '',
+    description: '',
+    website: 'www.sample.com.tw',
+    website_name: 'Gulp-Frontend-Start!',
+    keywords: '',
+    first_meet: 'This is index.html!!',
   },
-  partials: './partial.js',
-  layout:  "./layout/index.hbs", 
-  filename: "./index.html" 
-}
-];
-module.exports = route;
+};
+module.exports = hbsRouter;
 ```
 
 #### `./partial.js`
-**partial hbs** &nbsp;&nbsp;&nbsp;&nbsp;ex: {{> head}}
+**controll partial hbs.** Look [gulp-hbs-router](https://www.npmjs.com/package/gulp-hbs-router)
 
 #### `./gulpfile.js`
 control gulp
