@@ -1,4 +1,9 @@
-# generator-okgogoo [![NPM version][npm-image]][npm-url]
+# generator-okgogoo
+[![NPM version][npm-image]][npm-url]
+
+## Features
+- A complete, easy-used structure 
+- Make frontend things faster
 
 ## Installation
 
@@ -27,7 +32,7 @@ yo okgogoo
 ## Module
 
 #### GoGO Frontend
-Helps you to construct and orginize your static code , quickly minify html , css , js , img.  
+Helps you to construct and orginize your static code , quickly minify html , css , js , open server, and compress img.  
 
 - [GoGoFrontend.md](https://github.com/TseHang/generator-okgogoo/blob/master/GoGoFrontend.md)
 
@@ -35,18 +40,19 @@ Helps you to construct and orginize your static code , quickly minify html , css
 
 You can see the options of each sub generators by running `yo okgogoo:(sub-name) --help`.
 
-- `okgogoo:gulp`
-- `okgogoo:static` ( type )
+- `okgogoo:gulp-frontend`
+- `okgogoo:eslint`
+- `okgogoo:static` 
 
 
 
-#### Gulp
+#### Gulp-Frontend
 
 - Use to make a web frontend-flow-control .
 - Default:
-  - `canner-core` ( build )
   - `handlebar.js` ( hbs -> html )
   - `compass` ( scss )
+  - `ES6`
 
 ## License
 
@@ -54,7 +60,4 @@ MIT © [TseHang](https://github.com/TseHang)
 
 [npm-image]: https://badge.fury.io/js/generator-okgogoo.svg
 [npm-url]: https://npmjs.org/package/generator-okgogoo
-
-
-
 

@@ -2,6 +2,11 @@
 
 <%= description %>
 
+#### Prerequisites
+- [npm](https://www.npmjs.com) ( we assume you have pre-installed [node.js](https://nodejs.org/en/) ).
+- For **`Ubuntu`** , you must have to install `ruby` and `ruby-compass`
+  - **`$ sudo apt install ruby-compass`**
+
 ## Getting Started
 
 #### Install package
@@ -9,77 +14,23 @@
 npm install -i
 ```
 
-## Usage
+#### Usage
 
-build sass , js 
-```
-$ gulp
-```
-
-build hbs to html, and watch
-```
-$ ./bin/build -w
-```
-
-- Use `gulp` to construct it .
-- `canner-core` is your main component which you also use in `handlebar.js`.
-
-
-## Developer
-
-### gulp
-
-build sass , js , then watch
+build sass , js , hbs , open a server(`port: 8000`), then watch
 ```
 $ gulp
 ``` 
 
-minify css , js
+minify css , js, html, compress img 
 ```
-$ gulp minify-css
-$ gulp minify-js
+$ gulp minify
 ```
-
-
-concate all lib **js** or **css** file to one file ,  reduce request
-```
-$ gulp concate-css
-$ gulp concate-js
-```
-
-compress img ( It's usually use on final in your project)
-```
-$ gulp image
-```
-
-### canner-core
-
-build **hbs to html**
-```
-$ ./bin/build 
-```
-
-+ -w : watch
-+ -m : minify code
 
 ## License
 <%= license %> © [<%= authorName %>](<%= authorUrl %>)
 
 ---
-### About [GoGo Frontend ](GoGoFrontend.md)
+### About [GoGo Frontend ](GoGoFrontend.md) or Look [Gulp-frontend-start](https://github.com/TseHang/gulp-frontend-start).
 It helps you to construct and orginize your static code , quickly minify html , css , js , img.  
 
-Use [gulp](http://gulpjs.com) and [canner-core](https://www.npmjs.com/package/canner-core)
-( The html's template is [hbs](http://handlebarsjs.com) )
-
-+ gulp
-+ gulp-compass
-+ gulp-concat
-+ gulp-imagemin
-+ gulp-minify-css
-+ gulp-plumber
-+ gulp-rename
-+ gulp-uglify
-+ gulp-clean-css
-+ canner-core
-+ minist
+Use [gulp](http://gulpjs.com) ( The html's template is [hbs](http://handlebarsjs.com) )

@@ -4,13 +4,13 @@
 
 */
 'use strict';
-var _ = require('lodash');
-var chalk = require('chalk');
-var yosay = require('yosay');
-var generators = require('yeoman-generator');
-var askName = require('inquirer-npm-name');
-var parseAuthor = require('parse-author');
-var mkdirp = require('mkdirp');
+const _ = require('lodash');
+const chalk = require('chalk');
+const yosay = require('yosay');
+const generators = require('yeoman-generator');
+const askName = require('inquirer-npm-name');
+const parseAuthor = require('parse-author');
+const mkdirp = require('mkdirp');
 
 module.exports = generators.Base.extend({
   // note: arguments and options should be defined in the constructor.
@@ -18,7 +18,7 @@ module.exports = generators.Base.extend({
     generators.Base.apply(this, arguments);
     
     this.log(yosay(
-      'Hello, my name is ' + chalk.red('Okgogoo') + '! Let\'s Go!'
+      `Hello, my name is ${chalk.red('Okgogoo')}! Let's Go~~~~~~~~~~~~~~~`
     ));
   },
 
@@ -41,7 +41,7 @@ module.exports = generators.Base.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
     } else if (_.isString(this.pkg.author)) {
-      var info = parseAuthor(this.pkg.author);
+      const info = parseAuthor(this.pkg.author);
 
       this.props.authorName = info.name;
       this.props.authorEmail = info.email;
@@ -70,7 +70,7 @@ module.exports = generators.Base.extend({
         validate: function(str) {
           return str.length > 0;
         }
-      },this).then(function(answer) {
+      }, this).then(function(answer) {
         this.props.name = answer.name;
       }.bind(this));
     },
@@ -82,7 +82,19 @@ module.exports = generators.Base.extend({
         message: 'Choose a '+ chalk.red.bold('module') + ' go !',
         choices: this.props.templateTypeList,
         default: this.props.templateTypeList[0],
-        when: !this.props.templateType || this.props.templateTypeList.indexOf(this.props.templateType) === -1
+        when: !this.props.templateType || checkTemplateExist(this.props, this.props)
+      }, {
+        type: 'confirm',
+        name: 'eslint',
+        message: 'Do you need eslint ?',
+        default: 'Y',
+        when: !this.props.eslint
+      }, {
+        type: 'confirm',
+        name: 'eslint_in_global',
+        message: 'Is your eslint in global?',
+        default: 'Y',
+        when: this.props.eslint_in_global
       }]).then(function(answer) {
         this.props = _.merge(this.props, answer);
       }.bind(this));
@@ -93,7 +105,7 @@ module.exports = generators.Base.extend({
         type    : 'input',
         name    : 'description',
         message : 'Write some description:',
-        default : 'A GOOD PROJECT!',
+        default : 'Call me uncle, baby~',
         when: !this.props.description
       }, {
         type: 'input',
@@ -120,10 +132,14 @@ module.exports = generators.Base.extend({
         message: 'Author\'s Url: ',
         when: !this.props.authorUrl,
         store: true
+      }, {
+        type: 'input',
+        name:'keywords',
+        message: 'Keywords(Splitting with space): ',
+        when: !this.props.keywords,
+        store: true
       }]).then(function (answers) {
-        // merge in this.props
         this.props = _.merge(this.props, answers);
-
         this.log(chalk.red('\n\nIt\'s my pleasure to serve you, ' +this.props.authorName + "..."));
       }.bind(this));
     }
@@ -131,7 +147,7 @@ module.exports = generators.Base.extend({
 
   writing: {
     default: function () {
-      console.log(chalk.red("writing start...\n"));
+      console.log(chalk.red('Start writing...\n'));
 
       // write package.json
       var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -144,8 +160,8 @@ module.exports = generators.Base.extend({
           email: this.props.authorEmail,
           url: this.props.authorUrl
         },
-        main: 'lib/index.js',
-        keywords: [],
+        main: 'index.js',
+        keywords: _.uniq(this.props.keywords.split(' ')),
         type: this.props.templateType
       }, currentPkg);
 
@@ -153,41 +169,41 @@ module.exports = generators.Base.extend({
         newPkg.homepage = this.props.homepage;
         newPkg.repository = {
           type: 'git',
-          url: 'git+' + this.props.homepage + '.git'
-        };
+          url: `git+https://github.com/${this.props.authorName}/${this.props.name}.git`
+        },
         newPkg.bugs = {
-          url: this.props.homepage + '/issues'
+          url: `https://github.com/${this.props.authorName}/${this.props.name}/issues/`
         };
       }
 
-      if(this.props.templateTypeList.indexOf(newPkg.templateType) === -1) {
+      if(checkTemplateExist(this.props, newPkg)) {
         newPkg.templateType = this.props.templateType;
       }
 
-      if(this.props.keywords) {
-        newPkg.keywords = _.uniq(this.props.keywords.concat(newPkg.keywords));
-      }
-
       this.fs.writeJSON(this.destinationPath('package.json'), newPkg);
-
-      // copy gitignore
       this.fs.copyTpl(
         this.templatePath('gitignore'),
-        this.destinationPath('.gitignore'), {
-          type: this.props.templateType
-        }
+        this.destinationPath('.gitignore')
       );
     },
 
     composeWithType: function(){
       this.composeWith('okgogoo:static');
-
+      if(this.props.eslint) {
+        this.composeWith('okgogoo:eslint', {
+          options: {
+            eslint_in_global: this.props.eslint_in_global,
+          }
+        }, {
+          local: require.resolve('../eslint')
+        });
+      }
       switch(this.props.templateTypeList.indexOf(this.props.templateType)) {
         case 0:
-          this.composeWith('okgogoo:gulp');
+          this.composeWith('okgogoo:gulp-frontend');
           break;
         default:
-          this.composeWith('okgogoo:gulp');
+          this.composeWith('okgogoo:gulp-frontend');
           break;
       }
 
@@ -202,3 +218,8 @@ module.exports = generators.Base.extend({
   }
 
 });
+
+
+function checkTemplateExist(thisProject, otherProject) {
+  return thisProject.templateTypeList.indexOf(otherProject.templateType) === -1
+}

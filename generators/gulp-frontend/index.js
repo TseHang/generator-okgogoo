@@ -3,6 +3,7 @@
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 var mkdirp = require('mkdirp');
+var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
   initializing: function(){
@@ -16,7 +17,6 @@ module.exports = generators.Base.extend({
     mkdirp('lib');
     mkdirp('sass');
     mkdirp('src');
-    mkdirp('bin');
     mkdirp('layout');
     mkdirp('layout/partial');
   },
@@ -24,26 +24,23 @@ module.exports = generators.Base.extend({
   writing: function () {
 
     var defaultFileList= [{
-      src:'initial.mp3',
-      dist:'dist/audio/initial.mp3'
-    },{
       src:'initial.png',
       dist:'dist/img/initial.png'
-    },{
+    }, {
       src:'_index.scss',
       dist:'sass/index.scss'
-    },{
+    }, {
       src:'_index.js',
       dist:'js/index.js'
-    },{
+    }, {
       src:'_index.hbs', 
       dist: 'layout/index.hbs'
-    },{
+    }, {
       src:'_head.hbs',
       dist: 'layout/partial/head.hbs'
     }, {
-      src:'_normalize.css',
-      dist: 'src/normalize.css'
+      src:'_footer.hbs',
+      dist: 'layout/partial/footer.hbs'
     }, {
       src:'_gulpfile.js',
       dist: 'gulpfile.js'
@@ -51,14 +48,11 @@ module.exports = generators.Base.extend({
       src:'_partial.js',
       dist: 'partial.js'
     }, {
-      src:'_route.js',
-      dist: 'route.js'
-    },{
+      src:'_hbsRouter.js',
+      dist: 'hbsRouter.js'
+    }, {
       src:'_config.rb',
       dist: 'config.rb'
-    },{
-      src:'_build',
-      dist: 'bin/build'
     }];
 
     (function _fsCopyList(fileArray){
@@ -69,26 +63,24 @@ module.exports = generators.Base.extend({
   },
 
   install: function() {
-    var packages = {
-      save_dev:[
-        'gulp',
-        'gulp-clean-css',
-        'gulp-compass',
-        'gulp-concat',
-        'gulp-imagemin',
-        'gulp-minify-css',
-        'gulp-plumber',
-        'gulp-rename',
-        'gulp-uglify'
-      ],
-      save: [
-        'minimist',
-        'chalk',
-        'canner-core'
-      ]
-    };
-
-    this.npmInstall(packages.save_dev, {'save-dev': true});
-    this.npmInstall(packages.save, {'save': true});
+    var modules = [
+      'gulp',
+      'gulp-compass',
+      'gulp-concat',
+      'gulp-imagemin',
+      'gulp-plumber',
+      'gulp-rename',
+      'gulp-clean-css',
+      'gulp-uglify',
+      'gulp-hbs-router',
+      'gulp-webserver',
+      'gulp-minify-html',
+      'gulp-babel',
+      'chalk',
+      'babel-core',
+      'babel-preset-es2015',
+    ];
+    this.npmInstall(modules, {save: true});
+    console.log(chalk.yellow('Setting gulp-frontend-start...'))
   }
 });

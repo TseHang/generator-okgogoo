@@ -3,6 +3,7 @@
 var generators = require('yeoman-generator');
 var _ = require('lodash');
 var mkdirp = require('mkdirp');
+var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
 
@@ -30,6 +31,7 @@ module.exports = generators.Base.extend({
 
     if(pkg.templateType === 'Gogo Frontend'){
       _copyReadme('GoGoFrontend.md', 'GoGoFrontend.md', 'GogoF_README.md');
+      console.log(chalk.yellow('Finish writing README...'))
     }
     
   }

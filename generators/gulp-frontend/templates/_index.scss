@@ -1,5 +1,7 @@
+@import 'normalize';
 $black-color: #333 ;
 h1{
 	background-color: $black-color;
 	color: white;
+	line-height: 2;
 }
